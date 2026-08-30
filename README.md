@@ -1,4 +1,4 @@
-# Habit Garden (Health First)
+# Health First
 
 A habit-formation app for kids: daily health goals (water, movement, sleep, fruit) bank screen-time minutes as they're completed, with a parent dashboard for review, goal setup, and emergency unlock.
 
@@ -19,7 +19,7 @@ Demo Parent PIN: `1234`
 
 | File | Description |
 |---|---|
-| `habit_garden.html` | The working prototype — a single self-contained HTML/CSS/JS file. |
+| `health_first.html` | The working prototype — a single self-contained HTML/CSS/JS file. |
 | `Health_First_Solution_Blueprint.docx` | Original solution design doc (problem, MVP features, tech approach). |
 | `Health_First_Week2_Submission.pdf` | Week 2 submission — prototype design & development. |
 | `Health_First_Week3_Submission.docx` | Week 3 submission — build, integrate & mid-sprint review (AI/automation/data integration). |
@@ -28,7 +28,7 @@ Demo Parent PIN: `1234`
 
 ## Running it locally
 
-`habit_garden.html` has no build step and no dependencies — open it directly in a browser, or serve the folder with any static file server:
+`health_first.html` has no build step and no dependencies — open it directly in a browser, or serve the folder with any static file server:
 
 ```bash
 python -m http.server 8000
