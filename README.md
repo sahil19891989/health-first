@@ -22,6 +22,8 @@ Demo Parent PIN: `1234`
 | `habit_garden.html` | The working prototype — a single self-contained HTML/CSS/JS file. |
 | `Health_First_Solution_Blueprint.docx` | Original solution design doc (problem, MVP features, tech approach). |
 | `Health_First_Week2_Submission.pdf` | Week 2 submission — prototype design & development. |
+| `Health_First_Week3_Submission.docx` | Week 3 submission — build, integrate & mid-sprint review (AI/automation/data integration). |
+| `Health_First_Week4_Submission.docx` | Week 4 submission — user testing & validation. |
 | `Health_First_Week5_Submission.docx` | Week 5 submission — refinement & final prototype. |
 
 ## Running it locally
