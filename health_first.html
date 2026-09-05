@@ -164,6 +164,13 @@
     max-width:210px;
     line-height:1.4;
   }
+  .app-date{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.02em;
+    color:var(--ink-faint);
+    margin:4px 0 0;
+  }
   .header-actions{
     display:flex;
     align-items:center;
@@ -566,6 +573,19 @@
     color:var(--ink-faint);
     margin-top:8px;
   }
+  .reset-today-btn{
+    display:block;
+    margin:14px auto 0;
+    background:none;
+    border:1px dashed var(--line);
+    color:var(--ink-faint);
+    font-size:11px;
+    font-weight:600;
+    padding:7px 12px;
+    border-radius:999px;
+    cursor:pointer;
+  }
+  .reset-today-btn:hover{ color:var(--ink-soft); border-color:var(--ink-faint); }
 
   /* Goal setup */
   .goalsetup-list{
@@ -1201,6 +1221,8 @@
   var GOALS = state.goalDefs;
   var proofGoalId = null;
   var newGoalIcon = ICON_CHOICES[0];
+  var newGoalNameAuto = true;
+  var newGoalSubAuto = true;
   var pinBuffers = { emergency:"", bulk:"" };
 
   function goalById(id){ return GOALS.filter(function(g){ return g.id===id; })[0]; }
@@ -1251,6 +1273,16 @@
     g.dismissedReminder = true;
     if(!already) awardMinutes(id);
     return !already;
+  }
+
+  function resetToday(){
+    state.goals = freshGoals(GOALS);
+    state.minutesBalance = 0;
+    state.emergencyUnlocked = false;
+    state.celebratedToday = false;
+    save();
+    render();
+    showToast("Today's goals reset — ready to test again!");
   }
 
   function incrementCounter(id){
@@ -1308,6 +1340,13 @@
     bindPhoneEvents();
   }
 
+  function fmtDateDisplay(){
+    var d = new Date();
+    var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    return days[d.getDay()] + ", " + months[d.getMonth()] + " " + d.getDate();
+  }
+
   function renderHeaderTop(titleHtml, subtitle){
     var view = state.view;
     return (
@@ -1315,6 +1354,7 @@
         '<div>' +
           '<h2 class="app-title">' + titleHtml + '</h2>' +
           '<p class="app-subtitle">' + subtitle + '</p>' +
+          '<p class="app-date">' + fmtDateDisplay() + '</p>' +
         '</div>' +
         '<div class="header-actions">' +
           '<span class="streak-pill" title="Day streak">🌿 ' + state.streak + '</span>' +
@@ -1373,13 +1413,12 @@
     var unlocked = allUnlocked();
     var bal = Math.round(state.minutesBalance || 0);
     var active = unlocked || bal > 0;
-    var totalPossible = GOALS.reduce(function(sum, g){ return sum + (g.minutes || 15); }, 0);
     var lockIcon = '<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="4" y="11" width="16" height="9" rx="2.5"/><path d="M8 11V7.5a4 4 0 0 1 8 0V11"/></svg>';
     var pill = unlocked
       ? '<span class="tray-time-pill unlimited">Unlimited</span>'
       : (bal > 0
         ? '<span class="tray-time-pill available">' + bal + ' min left</span>'
-        : '<span class="tray-time-pill locked">' + lockIcon + ' up to ' + totalPossible + 'm</span>');
+        : '<span class="tray-time-pill locked">' + lockIcon + ' Locked</span>');
     return '<div class="app-tray">' +
       '<button class="tray-app' + (active?'':' locked') + '" data-action="tray" data-app="Games" type="button">' +
         '<span class="tray-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="8" width="19" height="9" rx="4"/><path d="M7 11v3M5.5 12.5h3"/><circle cx="15.5" cy="11.5" r="1"/><circle cx="18" cy="13.5" r="1"/></svg></span>' +
@@ -1497,6 +1536,7 @@
           'Emergency unlock (PIN required)' +
         '</button>' +
         '<p class="emergency-caption">For real emergencies only — bypasses today\'s goals</p>' +
+        '<button class="reset-today-btn" data-action="reset-today" type="button">🔄 Reset today\'s goals (for testing/demo)</button>' +
       '</div>';
   }
 
@@ -1608,6 +1648,8 @@
     if(emBtn) emBtn.addEventListener("click", openEmergency);
     var bulkBtn = phone.querySelector('[data-action="open-bulk-approve"]');
     if(bulkBtn) bulkBtn.addEventListener("click", openBulkApprove);
+    var resetBtn = phone.querySelector('[data-action="reset-today"]');
+    if(resetBtn) resetBtn.addEventListener("click", resetToday);
 
     phone.querySelectorAll('[data-action="parent-tab"]').forEach(function(el){
       el.addEventListener("click", function(){
@@ -1625,11 +1667,25 @@
         if(suggestion){
           var titleEl = document.getElementById("newGoalTitle");
           var subEl = document.getElementById("newGoalSub");
-          if(titleEl && !titleEl.value.trim()) titleEl.value = suggestion.title;
-          if(subEl && !subEl.value.trim()) subEl.value = suggestion.sub;
+          if(titleEl && (newGoalNameAuto || !titleEl.value.trim())){
+            titleEl.value = suggestion.title;
+            newGoalNameAuto = true;
+          }
+          if(subEl && (newGoalSubAuto || !subEl.value.trim())){
+            subEl.value = suggestion.sub;
+            newGoalSubAuto = true;
+          }
         }
       });
     });
+    var newGoalTitleEl = phone.querySelector("#newGoalTitle");
+    if(newGoalTitleEl){
+      newGoalTitleEl.addEventListener("input", function(){ newGoalNameAuto = false; });
+    }
+    var newGoalSubEl = phone.querySelector("#newGoalSub");
+    if(newGoalSubEl){
+      newGoalSubEl.addEventListener("input", function(){ newGoalSubAuto = false; });
+    }
     phone.querySelectorAll('[data-action="remove-goal"]').forEach(function(el){
       el.addEventListener("click", function(){
         var id = el.getAttribute("data-goal");
@@ -1663,6 +1719,8 @@
         if(minutes > 180) minutes = 180;
         addGoalDef(title, subEl.value.trim(), remindAt, newGoalIcon, minutes);
         newGoalIcon = ICON_CHOICES[0];
+        newGoalNameAuto = true;
+        newGoalSubAuto = true;
         render();
         showToast("\"" + title + "\" added to today's goals");
       });
