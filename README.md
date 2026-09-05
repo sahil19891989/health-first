@@ -25,8 +25,8 @@ Demo Parent PIN: `1234`
 | `Health_First_Week3_Submission.docx` | Week 3 submission — build, integrate & mid-sprint review (AI/automation/data integration). |
 | `Health_First_Week4_Submission.docx` | Week 4 submission — user testing & validation. |
 | `Health_First_Week5_Submission.docx` | Week 5 submission — refinement & final prototype. |
-| `Health_First_Week6_Submission.docx` | Week 6 submission — pitch preparation & project documentation (includes pitch video script). |
-| `Health_First_Week6_Pitch.pptx` | Week 6 pitch deck — 9 slides covering problem, solution, rewards, validation, and links. |
+| `Health_First_Week6_Submission.docx` | Week 6 submission — pitch preparation & final project documentation. |
+| `Health_First_Week6_Pitch.pptx` | Week 6 pitch deck — 10 slides: problem, why typical apps fail, solution, proof it's real, kid/parent experience, wider impact, validation timeline, links, and close. |
 
 ## Running it locally
 
