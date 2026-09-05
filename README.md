@@ -26,6 +26,7 @@ Demo Parent PIN: `1234`
 | `Health_First_Week4_Submission.docx` | Week 4 submission — user testing & validation. |
 | `Health_First_Week5_Submission.docx` | Week 5 submission — refinement & final prototype. |
 | `Health_First_Week6_Submission.docx` | Week 6 submission — pitch preparation & project documentation (includes pitch video script). |
+| `Health_First_Week6_Pitch.pptx` | Week 6 pitch deck — 9 slides covering problem, solution, rewards, validation, and links. |
 
 ## Running it locally
 
