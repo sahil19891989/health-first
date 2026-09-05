@@ -26,7 +26,7 @@ Demo Parent PIN: `1234`
 | `Health_First_Week4_Submission.docx` | Week 4 submission — user testing & validation. |
 | `Health_First_Week5_Submission.docx` | Week 5 submission — refinement & final prototype. |
 | `Health_First_Week6_Submission.docx` | Week 6 submission — pitch preparation & final project documentation. |
-| `Health_First_Week6_Pitch.pptx` | Week 6 pitch deck — 9 slides: problem, solution + advantages, why typical apps fail, how it works, architecture diagram, wider impact, proof it's real + links, and close. |
+| `Health_First_Week6_Pitch.pptx` | Week 6 pitch deck — 7 slides in simple, kid-friendly language: problem, solution + key features, app screen mockups, why it's different, try it, and a thank-you close. |
 
 ## Running it locally
 
