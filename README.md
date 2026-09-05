@@ -9,7 +9,7 @@ Demo Parent PIN: `1234`
 
 ## What it does
 
-- Kid checklist with four default goals — water (tap-per-glass counter), movement, sleep, fruit — each proven by photo (parent review) or parent PIN, and each banking a parent-configurable number of screen-time minutes.
+- Kid checklist with four default goals — water (tap-per-glass counter), movement, sleep, fruit — each proven by photo or a note asking a parent, both landing in a parent review queue (with a bulk-approve option), and each banking a parent-configurable number of screen-time minutes.
 - Sleep is checked each morning about *last night's* bedtime, so the reward isn't gated on something only verifiable after bedtime.
 - Screen time is spent via a live countdown on Games/YouTube, with a low-time warning before it runs out; finishing every goal unlocks unlimited time for the day.
 - Parent dashboard: review queue for photo submissions, PIN-gated emergency unlock, and a Goal Setup tab to add/remove goals and set each goal's reward minutes.
